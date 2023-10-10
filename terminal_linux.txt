@@ -1,0 +1,386 @@
+Задание
+--------------------------------------------------------------
+5. Выложить историю команд в терминале ubuntu
+--------------------------------------------------------------
+### Подготовим директорию для контрольной работы
+--------------------------------------------------------------
+
+mkdir control_work
+cd control_work
+
+--------------------------------------------------------------
+### 1. Используя команду cat в терминале операционной системы Linux, создать
+два файла Домашние животные (заполнив файл собаками, кошками, хомяками)
+---------------------------------------------------------------
+
+cat>pets
+
+Enter
+
+dog1
+cat1
+hamster1
+dog2
+cat2
+hamster2
+
+Ctrl+D
+
+-----------------------------------------------------------------
+### и Вьючные животными заполнив файл Лошадьми, верблюдами и ослы), 
+-----------------------------------------------------------------
+
+cat>pack_animals
+
+Enter
+
+horse1
+donkey1
+camel1
+horse2
+donkey2
+camel2
+
+Ctrl+D
+
+-----------------------------------------------------------------
+### а затем объединить их. 
+-----------------------------------------------------------------
+
+cat pets pack_animals > animals_all
+
+-----------------------------------------------------------------
+### Просмотреть содержимое созданного файла.
+-----------------------------------------------------------------
+
+cat animals_all
+
+-----------------------------------------------------------------
+### Переименовать файл, дав ему новое имя (Друзья человека).
+-----------------------------------------------------------------
+
+mv animals_all human_friends
+
+-----------------------------------------------------------------
+### 2. Создать директорию, переместить файл туда.
+-----------------------------------------------------------------
+
+mkdir animals_dir
+mv human_friends animals_dir/human_friends
+
+-----------------------------------------------------------------
+### 3. Подключить дополнительный репозиторий MySQL. 
+Установить любой пакет из этого репозитория.
+-----------------------------------------------------------------
+
+wget https://dev.mysql.com/get/mysql-apt-config_0.8.24-1_all.deb
+sudo dpkg -i mysql-apt-config_0.8.24-1_all.deb
+sudo apt-get update
+udo apt-get install mysql-server
+systemctl status mysql
+
+----------------------------------------------------------------
+4. Установить и удалить deb-пакет с помощью dpkg.
+----------------------------------------------------------------
+
+wget https://dev.mysql.com/get/Downloads/Connector-J/mysql-connector-j_8.0.32-1ubuntu22.04_all.deb
+sudo dpkg -i mysql-connector-j_8.0.32-1ubuntu22.04_all.deb
+sudo dpkg -r mysql-connector-j
+sudo apt-get autoremove
+
+----------------------------------------------------------------
+6. Нарисовать диаграмму, в которой есть класс родительский класс, домашние
+животные и вьючные животные, в составы которых в случае домашних
+животных войдут классы: собаки, кошки, хомяки, а в класс вьючные животные
+войдут: Лошади, верблюды и ослы).
+----------------------------------------------------------------
+
+https://github.com/NataliyaYadykina/dev_spec_control/blob/main/diagram.jpg
+
+----------------------------------------------------------------
+7. В подключенном MySQL репозитории создать базу данных “Друзья
+человека”
+----------------------------------------------------------------
+
+sudo mysql -u root -p
+create database human_friends;
+
+----------------------------------------------------------------
+8. Создать таблицы с иерархией из диаграммы в БД
+----------------------------------------------------------------
+
+use human_friends;
+
+CREATE TABLE cat (
+    -> id INT PRIMARY KEY AUTO_INCREMENT,
+    -> animal_name CHAR(30),
+    -> commands TEXT,
+    -> date_of_birth DATE
+    -> );
+
+CREATE TABLE dog (
+    -> id INT PRIMARY KEY AUTO_INCREMENT,
+    -> animal_name CHAR(30),
+    -> commands TEXT,
+    -> date_of_birth DATE
+    -> );
+
+CREATE TABLE hamster (
+    -> id INT PRIMARY KEY AUTO_INCREMENT,
+    -> animal_name CHAR(30),
+    -> commands TEXT,
+    -> date_of_birth DATE
+    -> );
+
+CREATE TABLE horse (
+    -> id INT PRIMARY KEY AUTO_INCREMENT,
+    -> animal_name CHAR(30),
+    -> commands TEXT,
+    -> date_of_birth DATE
+    -> );
+
+CREATE TABLE camel (
+    -> id INT PRIMARY KEY AUTO_INCREMENT,
+    -> animal_name CHAR(30),
+    -> commands TEXT,
+    -> date_of_birth DATE
+    -> );
+
+CREATE TABLE donkey (
+    -> id INT PRIMARY KEY AUTO_INCREMENT,
+    -> animal_name CHAR(30),
+    -> commands TEXT,
+    -> date_of_birth DATE
+    -> );
+
+-------------------------------------------------------------
+9. Заполнить низкоуровневые таблицы именами(животных), командами
+которые они выполняют и датами рождения
+-------------------------------------------------------------
+
+INSERT INTO cat (animal_name,commands, date_of_birth) VALUES 
+    ('cat1', 'meow', '2022-01-01'),
+    ('cat2', 'meow, stand', '2018-12-09'),
+    ('cat3', 'meow, wlow', '2021-04-02'),
+    ('cat4', 'meow', '2020-03-07'),
+    ('cat5', 'meow', '2019-08-05');
+
+INSERT INTO dog (animal_name,commands, date_of_birth) VALUES 
+    ('dog1', 'flufy', '2022-01-01'),
+    ('dog2', 'site', '2019-12-08'),
+    ('dog3', 'left hand', '2021-05-02'),
+    ('dog4', 'right hand', '2022-03-03'),
+    ('dog5', 'meow', '2019-05-01');
+
+INSERT INTO hamster (animal_name,commands, date_of_birth) VALUES 
+    ('ham1', 'eat', '2022-01-05'),
+    ('ham2', 'eat', '2018-11-10'),
+    ('ham3', 'left hand', '2021-02-12'),
+    ('ham4', 'right hand', '2023-01-03'),
+    ('ham5', 'meow', '2019-05-04');
+
+INSERT INTO horse (animal_name,commands, date_of_birth) VALUES 
+    ('horse1', 'eat', '2022-01-01'),
+    ('horse2', 'eat', '2019-10-10'),
+    ('horse3', 'left hand', '2021-05-02'),
+    ('horse4', 'right hand', '2020-06-03'),
+    ('horse5', 'meow', '2019-05-02');
+
+INSERT INTO camel (animal_name,commands, date_of_birth) VALUES 
+    ('cam1', 'eat', '2020-01-11'),
+    ('cam2', 'eat', '2018-10-10'),
+    ('cam3', 'left hand', '2021-02-12'),
+    ('cam4', 'right hand', '2020-08-03'),
+    ('cam5', 'meow', '2019-09-05');
+
+INSERT INTO donkey (animal_name,commands, date_of_birth) VALUES 
+    ('don1', 'eat', '2023-01-01'),
+    ('don2', 'eat', '2018-12-11'),
+    ('don3', 'left hand', '2021-07-02'),
+    ('don4', 'right hand', '2020-08-03'),
+    ('don5', 'meow', '2019-05-04');
+
+-------------------------------------------------------------
+10. Удалив из таблицы верблюдов, т.к. верблюдов решили перевезти в другой
+питомник на зимовку. Объединить таблицы лошади, и ослы в одну таблицу.
+-------------------------------------------------------------
+
+TRUNCATE camel;
+
+INSERT INTO horse (animal_name, commands, date_of_birth)
+SELECT animal_name, commands, date_of_birth
+FROM donkey;
+
+DROP TABLE donkey;
+
+RENAME TABLE horse TO horse_donkey;
+
+-------------------------------------------------------------
+11.Создать новую таблицу “молодые животные” в которую попадут все
+животные старше 1 года, но младше 3 лет и в отдельном столбце с точностью
+до месяца подсчитать возраст животных в новой таблице
+-------------------------------------------------------------
+
+CREATE TABLE young_animal (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    animal_name CHAR(30),
+    commands TEXT,
+    date_of_birth DATE,
+    age TEXT
+);
+
+
+
+INSERT INTO young_animal (animal_name, commands, date_of_birth, age)
+SELECT animal_name, commands, date_of_birth, CONCAT(
+            TIMESTAMPDIFF(YEAR, date_of_birth, CURDATE()),
+            ' years ',
+            TIMESTAMPDIFF(MONTH, date_of_birth, CURDATE()) % 12,
+            ' month'
+        )
+FROM cat
+WHERE TIMESTAMPDIFF(YEAR, date_of_birth, CURDATE()) BETWEEN 1 AND 2
+UNION ALL
+SELECT animal_name, commands, date_of_birth, CONCAT(
+            TIMESTAMPDIFF(YEAR, date_of_birth, CURDATE()),
+            ' years ',
+            TIMESTAMPDIFF(MONTH, date_of_birth, CURDATE()) % 12,
+            ' month'
+        )
+FROM dog
+WHERE TIMESTAMPDIFF(YEAR, date_of_birth, CURDATE()) BETWEEN 1 AND 2
+UNION ALL
+SELECT animal_name, commands, date_of_birth, CONCAT(
+            TIMESTAMPDIFF(YEAR, date_of_birth, CURDATE()),
+            ' years ',
+            TIMESTAMPDIFF(MONTH, date_of_birth, CURDATE()) % 12,
+            ' month'
+        )
+FROM hamster
+WHERE TIMESTAMPDIFF(YEAR, date_of_birth, CURDATE()) BETWEEN 1 AND 2
+UNION ALL
+SELECT animal_name, commands, date_of_birth, CONCAT(
+            TIMESTAMPDIFF(YEAR, date_of_birth, CURDATE()),
+            ' years ',
+            TIMESTAMPDIFF(MONTH, date_of_birth, CURDATE()) % 12,
+            ' month'
+        )
+FROM horse_donkey
+WHERE TIMESTAMPDIFF(YEAR, date_of_birth, CURDATE()) BETWEEN 1 AND 2;
+
+-------------------------------------------------------------------
+12. Объединить все таблицы в одну, при этом сохраняя поля, указывающие на
+прошлую принадлежность к старым таблицам.
+-------------------------------------------------------------------
+
+CREATE TABLE animals (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    animal_name CHAR(30),
+    commands TEXT,
+    date_of_birth DATE,
+    age TEXT,
+    animal_type ENUM('cat','dog','hamster', 'horse_donkey') NOT NULL
+);
+
+INSERT INTO animals (animal_name, commands, date_of_birth, age, animal_type)
+SELECT animal_name, commands, date_of_birth, CONCAT(
+            TIMESTAMPDIFF(YEAR, date_of_birth, CURDATE()),
+            ' years ',
+            TIMESTAMPDIFF(MONTH, date_of_birth, CURDATE()) % 12,
+            ' month'
+        ), 'cat'
+FROM cat;
+
+INSERT INTO animals (animal_name, commands, date_of_birth, age, animal_type)
+SELECT animal_name, commands, date_of_birth, CONCAT(
+            TIMESTAMPDIFF(YEAR, date_of_birth, CURDATE()),
+            ' years ',
+            TIMESTAMPDIFF(MONTH, date_of_birth, CURDATE()) % 12,
+            ' month'
+        ), 'dog'
+FROM dog;
+
+INSERT INTO animals (animal_name, commands, date_of_birth, age, animal_type)
+SELECT animal_name, commands, date_of_birth, CONCAT(
+            TIMESTAMPDIFF(YEAR, date_of_birth, CURDATE()),
+            ' years ',
+            TIMESTAMPDIFF(MONTH, date_of_birth, CURDATE()) % 12,
+            ' month'
+        ), 'hamster'
+FROM hamster;
+
+INSERT INTO animals (animal_name, commands, date_of_birth, age, animal_type)
+SELECT animal_name, commands, date_of_birth, CONCAT(
+            TIMESTAMPDIFF(YEAR, date_of_birth, CURDATE()),
+            ' years ',
+            TIMESTAMPDIFF(MONTH, date_of_birth, CURDATE()) % 12,
+            ' month'
+        ), 'horse_donkey'
+FROM horse_donkey;
+
+----------------------------------------------------------------------------
+13.Создать класс с Инкапсуляцией методов и наследованием по диаграмме.
+----------------------------------------------------------------------------
+
+https://github.com/NataliyaYadykina/dev_spec_control/tree/main/src/Animals
+
+----------------------------------------------------------------------------
+14. Написать программу, имитирующую работу реестра домашних животных.
+В программе должен быть реализован следующий функционал:
+14.1 Завести новое животное
+14.2 определять животное в правильный класс
+14.3 увидеть список команд, которое выполняет животное
+14.4 обучить животное новым командам
+14.5 Реализовать навигацию по меню
+----------------------------------------------------------------------------
+
+https://github.com/NataliyaYadykina/dev_spec_control/blob/main/src/Program.java
+
+----------------------------------------------------------------------------
+15.Создайте класс Счетчик, у которого есть метод add(), увеличивающий̆
+значение внутренней̆int переменной̆на 1 при нажатие “Завести новое
+животное” Сделайте так, чтобы с объектом такого типа можно было работать в
+блоке try-with-resources. Нужно бросить исключение, если работа с объектом
+типа счетчик была не в ресурсном try и/или ресурс остался открыт. Значение
+считать в ресурсе try, если при заведения животного заполнены все поля.
+----------------------------------------------------------------------------
+
+https://github.com/NataliyaYadykina/dev_spec_control/blob/main/src/Animals/Counter.java
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
